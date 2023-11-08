@@ -2,13 +2,13 @@
   "tests": [
     {
       "name": "Running Pytest",
-      "setup": "sudo -H pip3 install pytest",
+      "setup": "pip install -r ./requirements.txt",
       "run": "pytest",
       "input": "",
       "output": "",
       "comparison": "exact",
       "timeout": 10,
-      "points": null
+      "points": 1
     }
   ]
 }
