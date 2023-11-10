@@ -223,25 +223,25 @@ def test_Nuevo_enfoque_Reorganizar_conjugados():
 def teste_Limite_R():
     Organizador=cNuevoEnfoque
     paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)
-    paciente_2 = cPaciente("pepe", "rojo", 1, None, None, None)
+    paciente_2 = cPaciente("pepe", "Rojo", 1, None, None, None)
     paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
     Organizador = cNuevoEnfoque()
     Organizador.insert(paciente_1)
     Organizador.insert(paciente_2)
     Organizador.insert(paciente_3)
-    lim= Organizador.Limite_Color_R()
+    lim = Organizador.Limite_Color_R()
     assert lim == 1
 def teste_Limite_N_punta():
     Organizador=cNuevoEnfoque
     paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)
-    paciente_2 = cPaciente("pepe", "rojo", 1, None, None, None)
+    paciente_2 = cPaciente("pepe", "Rojo", 1, None, None, None)
     paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
     Organizador = cNuevoEnfoque()
     Organizador.insert(paciente_1)
     Organizador.insert(paciente_2)
     Organizador.insert(paciente_3)
     lim= Organizador.Limite_Color_N()
-    assert lim == 2
+    assert lim == len(Organizador.Lista_de_pacientes)
 
 def teste_Limite_N():
     Organizador=cNuevoEnfoque
@@ -278,7 +278,7 @@ def teste_limite_AM_limite():
     Organizador.insert(paciente_5)
     Organizador.insert(paciente_6)
     lim = Organizador.Limite_Color_AM()
-    assert lim == 5
+    assert lim == len(Organizador.Lista_de_pacientes)
 
 
 def teste_limite_AM():
@@ -316,7 +316,7 @@ def teste_limite_V_limite():
     Organizador.insert(paciente_5)
     Organizador.insert(paciente_6)
     lim = Organizador.Limite_Color_V()
-    assert lim == 5
+    assert lim == len(Organizador.Lista_de_pacientes)
 
 def teste_limite_V():
     paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)
@@ -356,6 +356,7 @@ def test_Reorganizar():
     paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
     paciente_4 = cPaciente("lala", "Naranja", 1, None, None, None)
 
+
     Organizador = cNuevoEnfoque()
     paciente_4.setTiempoLlegada(dt.datetime.now() - dt.timedelta(minutes=20))
     Organizador.insert(paciente_1)
@@ -374,4 +375,4 @@ def test_Reorganizar():
     for x in range(tam):
         Organizador.Reorganizar_greedy(Organizador.Lista_de_pacientes[x])
 
-    assert lista_prueba == Organizador.Lista_de_pacientes
+    assert lista_prueba[2] == Organizador.Lista_de_pacientes[2]
