@@ -144,8 +144,12 @@ class cNuevoEnfoque:
         """En este metodo guasrdamos en el archivo al paciente mas importante"""
         self.Handler.agregar_paciente(self.ObtenerProximo())
 
-    def Reorganizar_greedy(self, p):
-
+    def Reorganizar_greedy(self):
+        p = None
+        for i in range(0,len(self.Lista_de_pacientes)):
+            p = self.Lista_de_pacientes[i]
+        if p is None:
+            return
         if p.getGravedad() != 0:
             tiempo = p.getTiempoLlegada()
             fecha = dt.timedelta(0, 0, 0, 0, tiempo.minute, tiempo.hour, 0)
