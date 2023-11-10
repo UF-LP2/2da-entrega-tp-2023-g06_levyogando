@@ -2,10 +2,10 @@ import datetime as dt
 #import random
 
 import pytest
-from Classes.Nuevo_enfoque import *
-from Classes.cManejoArchivo import *
-from Classes.cSalaEspera import cSalaEspera
-from Classes import cRandoms
+from library.Classes.Nuevo_enfoque import *
+from library.Classes.cManejoArchivo import *
+from library.Classes.cSalaEspera import cSalaEspera
+from library.Classes import cRandoms
 def test_Error_Insercion_Gravedad():
     """
     Este test tiene que asertar si al paciente se lo instancia con una gravedad distinta a las posibles
@@ -220,52 +220,158 @@ def test_Nuevo_enfoque_Reorganizar_conjugados():
     assert paciente_obtenido_1.getGravedad() == 0
     assert paciente_obtenido_2.getGravedad() == 1
     assert paciente_obtenido_3.getGravedad() == 2
-
-"""
-hay que fixearlo 
-def test_Nuevo_enfoque_Reorganizar_Multiples_Pacientes():
+def teste_Limite_R():
+    Organizador=cNuevoEnfoque
+    paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)
+    paciente_2 = cPaciente("pepe", "rojo", 1, None, None, None)
+    paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
     Organizador = cNuevoEnfoque()
-    Lista_Pacientes = []
-    Enum = ["rojo", "naranja", "amarillo", "verde", "azul"]
-    cant = 20  # seteo el numero de pacientes
-    # AGREGO 20 PACIENTES A UNA LISTA
-    for i in range(0, cant):
-        nombre = "" + str(i)  # seteo el nombre de los pacientes
-        gravedad = i % 5  # seteo la gravedad de forma que la gravedad de los pacientes es ciclica de 0 a 4
-        pac = cPaciente(nombre, Enum[gravedad], 1, None, None, None)  # El seteo de la gravedad es al estilo enum
-        Lista_Pacientes.append(pac)  # agrego al paciente a la listas de pacientes
-        Organizador.insert(pac)  # agrego al paciente a
-    # cambio la gravedad de 3 pacientes que son categoria azul a la verde
-    for j in range(2, cant - 5, 5):
-        Lista_Pacientes[j].setTiempoLlegada(Lista_Pacientes[j].getTiempoLLegada() - dt.timedelta(minutes=61))
-    # cambio la gravedad de 3 pacientes que son categoria amarilla a la naranja
-    for t in range(4, cant - 5, 5):
-        Lista_Pacientes[t].setTiempoLlegada(Lista_Pacientes[t].getTiempoLLegada() - dt.timedelta(minutes=241))
-     #cambio la gravedad de 3 paciente que son categoría naranja
-    for t in range(1, cant - 5, 5):
-        Lista_Pacientes[t].setTiempoLlegada(Lista_Pacientes[t].getTiempoLLegada() - dt.timedelta(minutes=11))
-    
+    Organizador.insert(paciente_1)
+    Organizador.insert(paciente_2)
+    Organizador.insert(paciente_3)
+    lim= Organizador.Limite_Color_R()
+    assert lim == 1
+def teste_Limite_N_punta():
+    Organizador=cNuevoEnfoque
+    paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)
+    paciente_2 = cPaciente("pepe", "rojo", 1, None, None, None)
+    paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
+    Organizador = cNuevoEnfoque()
+    Organizador.insert(paciente_1)
+    Organizador.insert(paciente_2)
+    Organizador.insert(paciente_3)
+    lim= Organizador.Limite_Color_N()
+    assert lim == 2
 
-    Para poder probar si el test cambio bien de gravedad a los pacientes que esperaron mucho en la
-    sala de espera tengo que recorrer todo el arreglo de lista pacientes y ir sumando uno por uno
-     Organizador.Reorganizar()
-    #contadores
-    rojo=0
-    naranja=0
-    amarillo=0
-    verde=0
-    azul=0
-    for i in range(0,len(Organizador.Lista_de_pacientes)):
-        if(Lista_Pacientes[i].getGravedad()==0):
-            rojo=rojo+1
-        if (Lista_Pacientes[i].getGravedad() == 1):
-            naranja = naranja + 1
-        if (Lista_Pacientes[i].getGravedad() == 2):
-            amarillo = amarillo + 1
-        if (Lista_Pacientes[i].getGravedad() == 3):
-            verde = verde + 1
-        if (Lista_Pacientes[i].getGravedad() == 4):
-            azul = azul + 1
+def teste_Limite_N():
+    Organizador=cNuevoEnfoque
+    paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)
+    paciente_2 = cPaciente("pepe", "rojo", 1, None, None, None)
+    paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
+    paciente_4 = cPaciente("juan", "Naranja", 1, None, None, None)
+    paciente_5= cPaciente("pepe", "Amarillo", 1, None, None, None)
+    paciente_6 = cPaciente("lulu", "Amarillo", 1, None, None, None)
+    Organizador = cNuevoEnfoque()
+    Organizador.insert(paciente_1)
+    Organizador.insert(paciente_2)
+    Organizador.insert(paciente_3)
+    Organizador.insert(paciente_4)
+    Organizador.insert(paciente_5)
+    Organizador.insert(paciente_6)
+    lim= Organizador.Limite_Color_N()
+    assert lim == 3
 
-    assert naranja== 7
-    assert verde == 7"""
+
+def teste_limite_AM_limite():
+    Organizador = cNuevoEnfoque
+    paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)
+    paciente_2 = cPaciente("pepe", "rojo", 1, None, None, None)
+    paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
+    paciente_4 = cPaciente("juan", "Naranja", 1, None, None, None)
+    paciente_5 = cPaciente("pepe", "Amarillo", 1, None, None, None)
+    paciente_6 = cPaciente("lulu", "Amarillo", 1, None, None, None)
+    Organizador = cNuevoEnfoque()
+    Organizador.insert(paciente_1)
+    Organizador.insert(paciente_2)
+    Organizador.insert(paciente_3)
+    Organizador.insert(paciente_4)
+    Organizador.insert(paciente_5)
+    Organizador.insert(paciente_6)
+    lim = Organizador.Limite_Color_AM()
+    assert lim == 5
+
+
+def teste_limite_AM():
+    Organizador = cNuevoEnfoque
+    paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)
+    paciente_2 = cPaciente("pepe", "rojo", 1, None, None, None)
+    paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
+    paciente_4 = cPaciente("juan", "Naranja", 1, None, None, None)
+    paciente_5 = cPaciente("pepe", "Amarillo", 1, None, None, None)
+    paciente_6 = cPaciente("lulu", "Verde", 1, None, None, None)
+    Organizador = cNuevoEnfoque()
+    Organizador.insert(paciente_1)
+    Organizador.insert(paciente_2)
+    Organizador.insert(paciente_3)
+    Organizador.insert(paciente_4)
+    Organizador.insert(paciente_5)
+    Organizador.insert(paciente_6)
+    lim = Organizador.Limite_Color_AM()
+    assert lim == 4
+
+
+def teste_limite_V_limite():
+    Organizador = cNuevoEnfoque
+    paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)
+    paciente_2 = cPaciente("pepe", "rojo", 1, None, None, None)
+    paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
+    paciente_4 = cPaciente("juan", "Naranja", 1, None, None, None)
+    paciente_5 = cPaciente("pepe", "Amarillo", 1, None, None, None)
+    paciente_6 = cPaciente("lulu", "Verde", 1, None, None, None)
+    Organizador = cNuevoEnfoque()
+    Organizador.insert(paciente_1)
+    Organizador.insert(paciente_2)
+    Organizador.insert(paciente_3)
+    Organizador.insert(paciente_4)
+    Organizador.insert(paciente_5)
+    Organizador.insert(paciente_6)
+    lim = Organizador.Limite_Color_V()
+    assert lim == 5
+
+def teste_limite_V():
+    paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)
+    paciente_2 = cPaciente("pepe", "rojo", 1, None, None, None)
+    paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
+    paciente_4 = cPaciente("juan", "Naranja", 1, None, None, None)
+    paciente_5 = cPaciente("pepe", "Amarillo", 1, None, None, None)
+    paciente_6 = cPaciente("lulu", "Verde", 1, None, None, None)
+    paciente_7 = cPaciente("pepe", "Verde", 1, None, None, None)
+    paciente_8 = cPaciente("lulu", "Azul", 1, None, None, None)
+    Organizador = cNuevoEnfoque()
+    Organizador.insert(paciente_1)
+    Organizador.insert(paciente_2)
+    Organizador.insert(paciente_3)
+    Organizador.insert(paciente_4)
+    Organizador.insert(paciente_5)
+    Organizador.insert(paciente_6)
+    Organizador.insert(paciente_7)
+    Organizador.insert(paciente_8)
+    lim = Organizador.Limite_Color_V()
+    assert lim == 6
+
+def test_Cambia_color_gr():
+    paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
+    Organizador = cNuevoEnfoque()
+    paciente_3.setTiempoLlegada(dt.datetime.now() - dt.timedelta(minutes=20))
+    Organizador.insert(paciente_3)
+    Organizador.Reorganizar_greedy(paciente_3)
+    assert paciente_3.getGravedad() == 0
+
+
+def test_Reorganizar():
+    Organizador = cNuevoEnfoque
+    lista_prueba=[]
+    paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)
+    paciente_2 = cPaciente("pepe", "Rojo", 1, None, None, None)
+    paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
+    paciente_4 = cPaciente("lala", "Naranja", 1, None, None, None)
+
+    Organizador = cNuevoEnfoque()
+    paciente_4.setTiempoLlegada(dt.datetime.now() - dt.timedelta(minutes=20))
+    Organizador.insert(paciente_1)
+    Organizador.insert(paciente_2)
+    Organizador.insert(paciente_3)
+    Organizador.insert(paciente_4)
+
+
+    lista_prueba.append(paciente_1)
+    lista_prueba.append(paciente_2)
+    lista_prueba.append(paciente_4)
+    lista_prueba.append(paciente_3)
+
+
+    tam = len(Organizador.Lista_de_pacientes)
+    for x in range(tam):
+        Organizador.Reorganizar_greedy(Organizador.Lista_de_pacientes[x])
+
+    assert lista_prueba == Organizador.Lista_de_pacientes
