@@ -17,6 +17,10 @@ class cPaciente_sinGravedad:
         """
         return self._historial
 
+
+    def getTiempoLlegada(self):
+        return self._tiempoLlegada
+
     def getEdad(self):
         """
 

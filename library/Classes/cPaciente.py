@@ -14,6 +14,12 @@ class cPaciente(cPaciente_sinGravedad):
         GradoDolor=[1,2,3,4,5,6,7,8,9,10]
         #ver si poner o no como parametros el grado que seleciono el enfermero en triage
 
+    def get_tiempo_gravedad(self):
+        return self._gravedad.getTiempoGravedadActual()
+
+    def set_gravedad(self,nuevo_color):
+        self._gravedad.setGravedadMayor(nuevo_color)
+
 
     def getNombre(self):
         return self._nombre
