@@ -9,6 +9,16 @@
       "comparison": "exact",
       "timeout": 10,
       "points": 1
+    },
+    {
+      "name": "Running Pytest V2",
+      "setup": "pip install -r ./requirementes.txt",
+      "run": "pytest .",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 1
     }
   ]
 }
