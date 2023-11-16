@@ -1,15 +1,21 @@
 #import datetime
 
 import os
+from pathlib import Path
+
 import pandas as pd
 from .cEnfermero import *
 class cManejoArchivo:
     def __init__(self, archivo_csv=None):
+        # Assuming the current script is in the directory you want to go up from
+        current_directory = Path(__file__).resolve().parent
 
-        directorio_actual = os.path.dirname(__file__)
-        carpeta_superior = os.path.join(directorio_actual,
-                                        "../../../Laboratorio de programacion 2/G06_LevyOgando_Triage")
-        archivo_csv = os.path.join(carpeta_superior, "lista_pacientes.csv")
+        # Go up three levels
+        three_levels_up = current_directory.parent.parent.parent
+
+        # Access the file in the desired location
+        file_path = three_levels_up / "2da-entrega-tp-2023-g06_levyogando" /"library" / "Classes" / "lista_pacientes.csv"
+        archivo_csv = file_path
 
         if archivo_csv==None or not os.path.isfile(archivo_csv):
             self._archivo_csv = archivo_csv
