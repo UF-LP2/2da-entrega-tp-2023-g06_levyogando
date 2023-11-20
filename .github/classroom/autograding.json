@@ -1,8 +1,18 @@
 {
   "tests": [
     {
-      "name": "Unit Test Runner",
-      "setup": "https://gist.githubusercontent.com/eastanganelli/dba76bac7e9b9fc9a3f3d0416e00cbbb/raw/55f72318aadf52fa5fb050c71a83b8038abaf357/testing.sh",
+      "name": "requirements.txt",
+      "setup": "sudo -H pip install -r ./requirements.txt",
+      "run": "pytest .",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "requiementes.txt",
+      "setup": "sudo -H pip install -r ./requirementes.txt",
       "run": "pytest .",
       "input": "",
       "output": "",
