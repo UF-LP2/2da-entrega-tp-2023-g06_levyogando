@@ -1243,9 +1243,9 @@ def mostrar_datos(window):
     :param window:
     :return:
     """
-    if(Tablas_pacientes_atendidos is not None):
+    """if(Tablas_pacientes_atendidos is not None):
         Tablas_pacientes_atendidos.destroy()
-        Sala_de_espera.HandlerArchivos = cManejoArchivo()
+        Sala_de_espera.HandlerArchivos = cManejoArchivo()"""
     ultimos_datos = Sala_de_espera.HandlerArchivos.obtener_ultimos_datos()
     primeros_tres_pacientes = Sala_de_espera.HandlerArchivos.pacientes_buscando_cama().head(3)
     window.title("Últimos Datos")
