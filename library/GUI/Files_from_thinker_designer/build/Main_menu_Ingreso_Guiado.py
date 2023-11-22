@@ -615,11 +615,17 @@ def Abrir_menu_ingreso_datos_cargados(_window, color):
 def Abrir_menu_ingreso_guiado(_window):
     print("Boton Ingreso Guiado Apretado")
     global Father_off_windows
+    global Tablas_pacientes_atendidos
+    global grafico_sala_espera_creado
+    global grafico_categorias_creado
     if _window == Father_off_windows:
         _window.destroy()  # destruyo la ventana anterior
     else:
         _window.destroy()
         Father_off_windows.destroy()
+    Tablas_pacientes_atendidos = None
+    grafico_sala_espera_creado = None
+    grafico_categorias_creado = None
     Ingresar_paciente_con_guia()
 
 
@@ -1243,9 +1249,9 @@ def mostrar_datos(window):
     :param window:
     :return:
     """
-    """if(Tablas_pacientes_atendidos is not None):
+    if(Tablas_pacientes_atendidos is not None):
         Tablas_pacientes_atendidos.destroy()
-        Sala_de_espera.HandlerArchivos = cManejoArchivo()"""
+        Sala_de_espera.HandlerArchivos = cManejoArchivo()
     ultimos_datos = Sala_de_espera.HandlerArchivos.obtener_ultimos_datos()
     primeros_tres_pacientes = Sala_de_espera.HandlerArchivos.pacientes_buscando_cama().head(3)
     window.title("Últimos Datos")
