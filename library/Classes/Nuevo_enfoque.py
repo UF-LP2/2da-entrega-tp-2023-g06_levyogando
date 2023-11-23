@@ -59,6 +59,7 @@ class cNuevoEnfoque:
         if fin is None:
             fin = len(lista) - 1
 
+        
         if inicio > fin:
             return 0
 
@@ -144,23 +145,19 @@ class cNuevoEnfoque:
         """En este metodo guasrdamos en el archivo al paciente mas importante"""
         self.Handler.agregar_paciente(self.ObtenerProximo())
 
-    def Reorganizar_greedy(self):
-        p = None
-        for i in range(0,len(self.Lista_de_pacientes)):
-            p = self.Lista_de_pacientes[i]
-        if p is None:
-            return
-        if p.getGravedad() != 0:
-            tiempo = p.getTiempoLlegada()
-            fecha = dt.timedelta(0, 0, 0, 0, tiempo.minute, tiempo.hour, 0)
-            hora = dt.datetime.now()
-            ahora = dt.timedelta(0, 0, 0, 0, hora.minute, hora.hour, 0)
-            diferencia = (ahora - fecha).total_seconds() / 60
-            minutos = p.get_tiempo_gravedad()
-            ola = minutos.total_seconds() / 60
+       def Reorganizar_greedy(self,p):
 
-            if (diferencia > ola):
-                self.Cambiar_color_greedy(p)
+            if p.getGravedad() !=0:
+                tiempo=p.getTiempoLlegada()
+                fecha = dt.timedelta(0, 0, 0, 0, tiempo.minute, tiempo.hour, 0)
+                hora = dt.datetime.now()
+                ahora = dt.timedelta(0, 0, 0, 0, hora.minute, hora.hour, 0)
+                diferencia = (ahora - fecha).total_seconds() / 60
+                minutos= p.get_tiempo_gravedad()
+                ola=minutos.total_seconds()/60
+    
+                if (diferencia > ola):
+                    self.Cambiar_color_greedy(p)
 
     def Cambiar_color_greedy(self, p):
 
